@@ -1,5 +1,15 @@
+@(meal: Meal)
+@import org.joda.time.{Instant, Interval}
+
 @main(Page.Meals) {
     <div class="inner cover">
-        <p class="lead">This is the meals page.</p>
+        <h1 class="cover-heading">It has been @defining(new Interval(meal.timestamp, new Instant()).toDuration){diff =>
+            @{diff.getStandardHours} hours, @{diff.getStandardMinutes % 60} minutes, @{diff.getStandardSeconds % 60} seconds since the last meal
+        }
+        </h1>
+        <p class="lead">The last meal was @meal</p>
+        <form>
+            <button formaction="/meals" formmethod="post" type="submit" class="btn btn-lg btn-default">Log a meal</button>
+        </form>
     </div>
 }

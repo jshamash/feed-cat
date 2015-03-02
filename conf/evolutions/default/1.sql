@@ -2,5 +2,5 @@
 
 # --- !Ups
 CREATE TABLE Events (
-  eventTime VARCHAR(100) NOT NULL
+  eventTime BIGINT NOT NULL PRIMARY KEY
 );

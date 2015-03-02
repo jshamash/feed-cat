@@ -3,14 +3,13 @@
 # ~~~~
 
 # Home page
-GET         /                     controllers.Application.index
-GET         /meals                controllers.Application.meals
-GET         /cat                  controllers.Application.cat
+GET        /                     controllers.Application.index
+GET        /meals                controllers.Application.getMeals
+GET        /cat                  controllers.Application.cat
+
+POST       /meals               controllers.Application.postMeal
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         controllers.Assets.at(path="/public", file)
+GET        /assets/*file         controllers.Assets.at(path="/public", file)
 
-GET         /webjars/*file        controllers.WebJarAssets.at(file)
-
-GET         /events               controllers.Application.getEvents
-POST        /events               controllers.Application.postEvent
+GET        /webjars/*file        controllers.WebJarAssets.at(file)
