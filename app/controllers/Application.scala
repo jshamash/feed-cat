@@ -14,8 +14,8 @@ object Application extends Controller {
   }
   
   def postEvent = Action {
-    logEvent()
-    Ok("Logged")
+    val events = logAndFetchEvent
+    Ok(events.toString())
   }
   
   def getEvents = Action {
@@ -23,8 +23,10 @@ object Application extends Controller {
     Ok(events.toString())
   }
   
-  def logEvent() = DB.withConnection { implicit c =>
+  def logAndFetchEvent() = DB.withConnection { implicit c =>
     val result = SQL("insert into Events(eventTime) values ({timestamp})").on('timestamp -> DateTime.now().toString()).executeInsert()
+    val selectEvents = SQL("Select * from Events")
+    selectEvents().map(x => x[String]("eventTime")).toList
   }
   
   def fetchEvents = DB.withConnection { implicit c =>
