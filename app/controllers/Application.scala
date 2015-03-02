@@ -1,6 +1,9 @@
 package controllers
 
+import java.sql.Connection
+
 import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import play.api._
 import play.api.mvc._
 import play.api.db.DB
@@ -10,27 +13,30 @@ import play.api.Play.current
 object Application extends Controller {
 
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok(views.html.main())
   }
   
   def postEvent = Action {
-    val events = logAndFetchEvent
-    Ok(events.toString())
+    val events = DB.withConnection { implicit c =>
+      logEvent
+      fetchEvents
+    }
+    Ok(events.map(formatTime).mkString("\n"))
   }
   
   def getEvents = Action {
-    val events = fetchEvents
-    Ok(events.toString())
+    val events = DB.withConnection { implicit c =>
+      fetchEvents
+    }
+    Ok(events.map(formatTime).mkString("\n"))
   }
   
-  def logAndFetchEvent() = DB.withConnection { implicit c =>
-    val result = SQL("insert into Events(eventTime) values ({timestamp})").on('timestamp -> DateTime.now().toString()).executeInsert()
+  def logEvent(implicit c: Connection) = SQL("insert into Events(eventTime) values ({timestamp})").on('timestamp -> DateTime.now().toString()).executeInsert()
+  
+  def fetchEvents(implicit c: Connection) = {
     val selectEvents = SQL("Select * from Events")
-    selectEvents().map(x => x[String]("eventTime")).toList
+    selectEvents().map(x => x[String]("eventTime")).map(time => new DateTime(time)).toList
   }
   
-  def fetchEvents = DB.withConnection { implicit c =>
-    val selectEvents = SQL("Select * from Events")
-    selectEvents().map(x => x[String]("eventTime")).toList
-  }
+  def formatTime(time: DateTime): String = DateTimeFormat.fullDateTime().print(time)
 }
