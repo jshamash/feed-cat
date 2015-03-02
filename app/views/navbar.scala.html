@@ -1,0 +1,14 @@
+@(page: Page.Page)
+
+<div class="masthead clearfix">
+    <div class="inner">
+            <!--<h3 class="masthead-brand">Should I feed my cat?</h3>-->
+        <nav>
+            <ul class="nav masthead-nav">
+                <li @if(page == Page.Home) {class="active"}><a href="/">Home</a></li>
+                <li @if(page == Page.Meals) {class="active"}><a href="/meals">Meals</a></li>
+                <li @if(page == Page.Cat) {class="active"}><a href="/cat">Cat</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

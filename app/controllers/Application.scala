@@ -13,7 +13,15 @@ import play.api.Play.current
 object Application extends Controller {
 
   def index = Action {
-    Ok(views.html.main())
+    Ok(views.html.index())
+  }
+  
+  def meals = Action {
+    Ok(views.html.meals())
+  }
+  
+  def cat = Action {
+    Ok(views.html.cat())
   }
   
   def postEvent = Action {

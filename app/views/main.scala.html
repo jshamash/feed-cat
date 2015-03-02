@@ -1,3 +1,4 @@
+@(page: Page.Page)(content: Html)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,26 +27,9 @@
 
                 <div class="cover-container">
 
-                    <div class="masthead clearfix">
-                        <div class="inner">
-                            <!--<h3 class="masthead-brand">Should I feed my cat?</h3>-->
-                            <nav>
-                                <ul class="nav masthead-nav">
-                                    <li class="active"><a href="#">Home</a></li>
-                                    <li><a href="/events">Meals</a></li>
-                                    <li><a href="#">Cat</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    @navbar(page)
 
-                    <div class="inner cover">
-                        <h1 class="cover-heading">Should I feed my cat?</h1>
-                        <p class="lead">This is one man's mission to regulate his cat's chaotic feeding cycle, one meal at a time.</p>
-                        <p class="lead">
-                            <a href="#" class="btn btn-lg btn-default">Log a meal</a>
-                        </p>
-                    </div>
+                    @content
 
                     <div class="mastfoot">
                         <div class="inner">
