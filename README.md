@@ -7,6 +7,6 @@ I will feed my cat when I get home, he will finish his food before my girlfriend
 ### The Solution
 An NFC tag is placed on the food container. Whenever someone feeds the cat, they first touch their smartphone to the tag. This will log the feeding, or notify them if this feeding is too close in time to the previous one and therefore should not occur.
 
-### The cat
+### The Cat
 ![cat]
 (https://lh5.googleusercontent.com/bhCYcXh67GhTLuh46xxzB5ezlqemRMHpOp6--XKWV7M=w349-h404-no)
