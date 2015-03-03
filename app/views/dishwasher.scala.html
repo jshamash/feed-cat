@@ -1,0 +1,25 @@
+@(uuid: String, isClean: Boolean)
+
+@main(Page.Home) {
+
+    
+    <div class="inner cover">
+        <h1 class="cover-heading">
+            The dishwasher is
+        </h1>
+        <div id="toggler">
+            <input type="checkbox" @if(isClean){checked} data-toggle="toggle" data-onstyle="success" data-on="clean" data-offstyle="danger" data-off="dirty">
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function(){
+        $("#toggler" ).click(function() {
+            $.ajax({
+                url: '/dishwasher/@uuid',
+                type: 'PUT'
+            });
+        });
+    });
+</script>
